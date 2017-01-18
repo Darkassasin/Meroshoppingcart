@@ -14,12 +14,19 @@ public class Product {
     private String product_name;
     private int product_qty;
     private int product_price;
+    private String category;
+
+    public Product() {
+    }
 
     
-    public Product(int product_id, String product_name,int product_price) {
+    
+    public Product(int product_id, String product_name,int product_price,String category,int qty) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.product_price=product_price;
+        this.category=category;
+        this.product_qty=qty;
     }
 
     
@@ -55,11 +62,21 @@ public class Product {
         this.product_price = product_price;
     }
 
-    
-    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "product_id=" + product_id + ", product_name=" + product_name + ", product_qty=" + product_qty + ", product_price=" + product_price + '}';
+        return "Product{" + "product_id=" + product_id + ", product_name=" + product_name + ", product_qty=" + product_qty + ", product_price=" + product_price + ", category=" + category + '}';
     }
+
+    
+    
+
     
 }

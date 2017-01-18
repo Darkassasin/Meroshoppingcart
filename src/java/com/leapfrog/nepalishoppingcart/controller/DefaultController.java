@@ -7,6 +7,10 @@ package com.leapfrog.nepalishoppingcart.controller;
 
 import com.leapfrog.nepalishoppingcart.DAO.ProductDAO;
 import com.leapfrog.nepalishoppingcart.Entity.Product;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,11 +29,14 @@ public class DefaultController {
    
    @RequestMapping(method = RequestMethod.GET)
    public String index(ModelMap map){
-       Product p= new Product(1,"Acer aspire 5742",80000);
-       System.out.println(productDAO.getall());
-       map.addAttribute("products",productDAO.getall());
-      //map.addAttribute("pro", productDAO.getall());
+           map.addAttribute("products",productDAO.getall());
+           //map.addAttribute("pro", productDAO.getall());
        return "index";
    }
-  
+   
+     @RequestMapping(value="/logout",method = RequestMethod.GET)
+   public String index(HttpServletRequest req){
+       req.getSession(false).invalidate();
+       return "redirect:/";
+   }
 }

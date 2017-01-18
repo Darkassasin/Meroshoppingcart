@@ -16,4 +16,5 @@
     <system systemId="http://www.springframework.org/schema/tx" uri="www.springframework.org/schema/tx/index"/>
     <system systemId="http://www.springframework.org/schema/aop" uri="www.springframework.org/schema/aop/index"/>
     <system systemId="http://www.springframework.org/schema/security" uri="www.springframework.org/schema/security/index"/>
+    <system systemId="http://www.springframework.org/schema/security/spring-security.xsd" uri="www.springframework.org/schema/security/spring-security.xsd"/>
 </catalog>

@@ -8,8 +8,15 @@ package com.leapfrog.nepalishoppingcart.DAO.impl;
 import com.leapfrog.nepalishoppingcart.DAO.ProductDAO;
 import com.leapfrog.nepalishoppingcart.Entity.Product;
 import com.leapfrog.nepalishoppingcart.controller.Setcontroller;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,18 +27,27 @@ import org.springframework.stereotype.Repository;
 public class productdaoimpl implements ProductDAO {
     Setcontroller sctrl=new Setcontroller();
     Set<Product> productset = new LinkedHashSet<>();
-    Product p1 = new Product(1,"Pencil",5);
-    Product p2 = new Product(2,"Pen",60);
-    Product p3 = new Product(3,"Copy",80);
-    Product p4 = new Product(4,"Java Programming for Beginners",550);
 
+    @Autowired
+    private JdbcTemplate JdbcTemplate;
     @Override
     public Set<Product> getall() {
-        productset = new LinkedHashSet<>();
-        productset.add(p1);
-        productset.add(p2);
-        productset.add(p3);
-        productset.add(p4);
+        List<Product> productlist=new ArrayList<>();
+        String sql="SELECT * FROM tbl_product";
+        productlist=JdbcTemplate.query(sql,new RowMapper<Product>(){
+
+            @Override
+            public Product mapRow(ResultSet rs, int i) throws SQLException {
+                        Product product= new Product();
+                        product.setProduct_id(rs.getInt("id"));
+                        product.setProduct_name(rs.getString("name"));
+                        product.setProduct_qty(rs.getInt("qty"));
+                        product.setProduct_price(rs.getInt("rate"));
+                        product.setCategory(rs.getString("category"));
+                        return product;
+            }
+        });
+        productset = new LinkedHashSet<>(productlist);
         return productset;
     }
 
@@ -46,8 +62,10 @@ public class productdaoimpl implements ProductDAO {
     }
 
     @Override
-    public String toString() {
-        return "productdaoimpl{" + "sctrl=" + sctrl + ", productset=" + productset + ", p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + '}';
+    public int insert(Product p) throws ClassNotFoundException, SQLException {
+       String sql="INSERT INTO tbl_product(name,rate,category,qty) VALUES(?,?,?,?,?)";
+       Object[] obj={p.getProduct_name(),p.getProduct_price(),p.getCategory(),p.getProduct_qty()};
+       return JdbcTemplate.update(sql,obj);
     }
     
     
