@@ -9,9 +9,9 @@
         <title>Admin Page</title>
     </head>
     <body>
-        <button type="button" class="btn btn-primary" id="addproduct">Add Product to DB</button>
+        <a href="${SITE_URL}/admin/logout"><button type="button" class="btn btn-primary" id="logout">Logout</button></a>
         <div class="form-group">
-            <form action="${SITE_URL}/admin/add" method="POST" modelAttribute="add">
+            <form action="${SITE_URL}/admin/add" method="POST" ModelAttribute="add" target="_blank">
                 <div>
                     <label>Product Name</label>
                     <input type="text" name="product_name">
@@ -29,7 +29,7 @@
                     <input type="text" name="product_qty">
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"</span></button>
+                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Add to DB</button>
                 </div>
             </form>
         </div>

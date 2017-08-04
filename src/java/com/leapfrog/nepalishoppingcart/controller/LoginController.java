@@ -21,8 +21,4 @@ public class LoginController {
     public String index(){
         return "login";
     }
-     @RequestMapping(method = RequestMethod.POST)
-    public String index2(){
-        return "admin/index";
-    }
 }

@@ -30,7 +30,6 @@ public class DefaultController {
    @RequestMapping(method = RequestMethod.GET)
    public String index(ModelMap map){
            map.addAttribute("products",productDAO.getall());
-           //map.addAttribute("pro", productDAO.getall());
        return "index";
    }
    

@@ -17,5 +17,4 @@ public interface ProductDAO {
     Set<Product> getall();
     Product getbyId(int id);
     int insert(Product p) throws ClassNotFoundException,SQLException;
-    
 }

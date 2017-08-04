@@ -8,12 +8,9 @@ package com.leapfrog.nepalishoppingcart.controller;
 import com.leapfrog.nepalishoppingcart.DAO.ProductDAO;
 import com.leapfrog.nepalishoppingcart.Entity.Product;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,14 +26,24 @@ public class AdminController {
     @Autowired
     private ProductDAO productDAO;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/index",method = RequestMethod.GET)
     public String index() {
         return "admin/index";
     }
 
-    @RequestMapping(value = "admin/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String index(HttpServletRequest req) {
         req.getSession(false).invalidate();
-        return "login";
+        return "index";
+    }
+    
+    @RequestMapping(value="/add",method = RequestMethod.POST)
+    public  String save(@ModelAttribute("add") Product product) {
+        try {
+            productDAO.insert(product);
+        } catch (ClassNotFoundException | SQLException ex) {
+
+        }
+        return "admin/index";
     }
 }

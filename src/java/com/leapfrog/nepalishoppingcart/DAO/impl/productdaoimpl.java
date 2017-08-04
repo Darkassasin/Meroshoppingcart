@@ -8,6 +8,7 @@ package com.leapfrog.nepalishoppingcart.DAO.impl;
 import com.leapfrog.nepalishoppingcart.DAO.ProductDAO;
 import com.leapfrog.nepalishoppingcart.Entity.Product;
 import com.leapfrog.nepalishoppingcart.controller.Setcontroller;
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,11 +64,15 @@ public class productdaoimpl implements ProductDAO {
 
     @Override
     public int insert(Product p) throws ClassNotFoundException, SQLException {
-       String sql="INSERT INTO tbl_product(name,rate,category,qty) VALUES(?,?,?,?,?)";
+       String sql="INSERT INTO tbl_product(name,rate,category,qty) VALUES(?,?,?,?)";
        Object[] obj={p.getProduct_name(),p.getProduct_price(),p.getCategory(),p.getProduct_qty()};
        return JdbcTemplate.update(sql,obj);
     }
     
-    
+    public int upload(Product p) throws ClassNotFoundException, SQLException{
+       String sql="INSERT INTO tbl_upload(image) VALUES(?)";
+       Object[] obj={p.getFile()};
+       return JdbcTemplate.update(sql,obj);
+    }
 }
  

@@ -15,12 +15,11 @@ public class Product {
     private int product_qty;
     private int product_price;
     private String category;
+    private String file;
 
     public Product() {
     }
 
-    
-    
     public Product(int product_id, String product_name,int product_price,String category,int qty) {
         this.product_id = product_id;
         this.product_name = product_name;
@@ -69,6 +68,15 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+    
 
     @Override
     public String toString() {
